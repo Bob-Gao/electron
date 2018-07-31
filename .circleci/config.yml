@@ -156,6 +156,10 @@ gn-build-steps: &gn-build-steps
           echo 'export PATH="$PATH:'"$PWD"'/depot_tools"' >> $BASH_ENV
     - checkout:
         path: src/electron
+    - run:
+        name: Start dbus mock server
+        command: |
+          python src/electron/script/lib/dbus_mock.py start
     - restore_cache:
         paths:
           - ~/.gclient-cache
